@@ -1,0 +1,230 @@
+//Snowman and House Scene
+//Snowman
+group -em -name "Snowman";
+polySphere -name "Snowman_Bottom" -radius 1 -subdivisionsHeight 15 -subdivisionsAxis 15 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+move 0 .85 0 "Snowman_Bottom";
+scale 1 .87 1;
+parent "Snowman_Bottom" "Snowman";
+polySphere -name "Snowman_Middle" -radius 1 -subdivisionsHeight 15 -subdivisionsAxis 15 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+move 0 1.98 0 "Snowman_Middle";
+scale .72 .62 .72;
+parent "Snowman_Middle" "Snowman";
+polySphere -name "Snowman_Top" -radius 1 -subdivisionsHeight 15 -subdivisionsAxis 15 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+move 0 2.9 0 "Snowman_Top";
+scale .57 .5 .57;
+parent "Snowman_Top" "Snowman";
+polyCylinder -name "Hat" -radius 1 -subdivisionsHeight 1 -subdivisionsCaps 0 -subdivisionsAxis 15 -createUVs 3 -constructionHistory 1;
+move 0 3.202 -.087 "Hat";
+scale .708 .037 .708 "Hat";
+select -r Hat.f[16];
+polyExtrudeFacet -constructionHistory 1;
+scale -r -p 0 3.33 -.2 .67 1 .67;
+polyExtrudeFacet -constructionHistory 1;
+move -r -os -wd 0 0.6 0;
+rotate -21.397 0 0 "Hat";
+parent "Hat" "Snowman";
+select -r Hat.e[30:44] Hat.e[75:76] Hat.e[78] Hat.e[80] Hat.e[82] Hat.e[84] Hat.e[86] Hat.e[88] Hat.e[90] Hat.e[92] Hat.e[94] Hat.e[96] Hat.e[98] Hat.e[100] Hat.e[102] ;
+polySmooth;
+polyCylinder -name "Carrot" -axis 0 1 0 -subdivisionsHeight 3 -subdivisionsCaps 0 -subdivisionsAxis 10 -createUVs 3 -constructionHistory 1;
+move -.7 2.85 0;
+scale .092 .165 .092;
+rotate 0 0 90;
+select -r Carrot.f[31] Carrot.f[20:29] Carrot.f[10:19];
+scale -r -p -0.75 2.85 0 0.75 1 0.75 ;
+select -deselect Carrot.f[10:19];
+scale -r -p -0.8 2.8 0 0.81 1 0.81 ;
+select -deselect Carrot.f[20:29];
+scale -r -p -0.86 2.84 0 0.4 0.4 0.4 ;
+select "Carrot";
+polySmooth;
+parent "Carrot" "Snowman";
+polySphere -name "Eye_01" -r 1 -subdivisionsAxis 8 -subdivisionsHeight 8 -createUVs 2 -constructionHistory 1;
+move -.474 3 .26;
+scale .09 .05 .09;
+rotate 27.9 0 90;
+polySmooth;
+parent "Eye_01" "Snowman";
+polySphere -name "Eye_02" -r 1 -subdivisionsAxis 8 -subdivisionsHeight 8 -createUVs 2 -constructionHistory 1;
+move -.5 3 -.25;
+scale .09 .05 .09;
+rotate -15.5 0 90;
+polySmooth;
+parent "Eye_02" "Snowman";
+polySphere -name "Mouth_01" -r 1 -subdivisionsAxis 8 -subdivisionsHeight 8 -createUVs 2 -constructionHistory 1;
+move -.45 2.7 .25;
+scale .05 .03 .05;
+rotate 18.4 .43 117;
+polySmooth;
+parent "Mouth_01" "Snowman";
+polySphere -name "Mouth_02" -r 1 -subdivisionsAxis 8 -subdivisionsHeight 8 -createUVs 2 -constructionHistory 1;
+move -.48 2.64 .08;
+scale .05 .03 .05;
+rotate 5.75 2.05 130;
+polySmooth;
+parent "Mouth_02" "Snowman";
+polySphere -name "Mouth_03" -r 1 -subdivisionsAxis 8 -subdivisionsHeight 8 -createUVs 2 -constructionHistory 1;
+move -.46 2.64 -.092;
+scale .05 .03 .05;
+rotate -12.45 9.23 126;
+polySmooth;
+parent "Mouth_03" "Snowman";
+polySphere -name "Mouth_04" -r 1 -subdivisionsAxis 8 -subdivisionsHeight 8 -createUVs 2 -constructionHistory 1;
+move -.44 2.68 -.25;
+scale .05 .03 .05;
+rotate -15 4.22 105.5;
+polySmooth;
+parent "Mouth_04" "Snowman";
+polySphere -name "Button_01" -r 1 -subdivisionsAxis 8 -subdivisionsHeight 8 -createUVs 2 -constructionHistory 1;
+move -.81 1.33 .12;
+scale .1 .055 .1;
+rotate 0 0 48;
+polySmooth;
+parent "Button_01" "Snowman";
+polySphere -name "Button_02" -r 1 -subdivisionsAxis 8 -subdivisionsHeight 8 -createUVs 2 -constructionHistory 1;
+move -.701 1.84 .12;
+scale .08 .044 .08;
+rotate 0 0 92;
+polySmooth;
+parent "Button_02" "Snowman";
+polySphere -name "Button_03" -r 1 -subdivisionsAxis 8 -subdivisionsHeight 8 -createUVs 2 -constructionHistory 1;
+move -.62 2.3 .1;
+scale .06 .04 .06;
+rotate 0 0 58.3;
+polySmooth;
+parent "Button_03" "Snowman";
+//Move Group
+move 1.63 0 3.01 "Snowman";
+scale 1.1 1.1 1.1 "Snowman";
+rotate 0 222 0 "Snowman";
+
+//House
+group -em -name "House";
+polyCube -w 1 -h 1 -d 1 -sx 4 -sy 4 -sz 5 -ax 0 1 0 -cuv 4 -ch 1 -name "House_Body";
+move 0 3.06 0;
+scale 6.19 5.9 8.8;
+select -r House_Body.e[28:31] House_Body.e[60:63] House_Body.e[178] House_Body.e[182] House_Body.e[186] House_Body.e[190] House_Body.e[209] House_Body.e[213] House_Body.e[217] House_Body.e[221] ;
+move -r -os -wd 0 0 0.18 ;
+select -r House_Body.e[32:35] House_Body.e[56:59] House_Body.e[177] House_Body.e[181] House_Body.e[185] House_Body.e[189] House_Body.e[208] House_Body.e[212] House_Body.e[216] House_Body.e[220] ;
+move -r -os -wd 0 0 -0.84 ;
+select -r House_Body.e[12:15] House_Body.e[40:43] House_Body.e[172:176] House_Body.e[203:207] ;
+move -r -os -wd 0 0.81 0 ;
+select -r House_Body.e[8:11] House_Body.e[44:47] House_Body.e[167:171] House_Body.e[198:202] ;
+move -r -os -wd 0 1.4 0 ;
+select -r House_Body.e[4:7] House_Body.e[48:51] House_Body.e[162:166] House_Body.e[193:197] ;
+move -r -os -wd 0 1.07 0 ;
+select -r House_Body.f[73] House_Body.f[78];
+//Door
+polyExtrudeFacet;
+move -r -os -wd 0.75 0 0 ;
+rotate -r -p 3.84 2.31 -2.1 -os -fo 0 0 -8.6 ;
+polyExtrudeFacet;
+scale -r -p 3.84 2.3 -2.1 0.87 0.87 0.87 ;
+move -r -os -wd 0 -0.18 0 ;
+polyExtrudeFacet;
+move -r -os -wd -0.38 0 0 ;
+rotate -r -p 3.5 2.1 -2.1 -os -fo 0 0 4 ;
+//Window
+select -r House_Body.f[80];
+scale -r -p 3.1 3.6 1.8 1 1 1.9 ;
+polyExtrudeFacet;
+move -r -os -wd 0.22 0 0 ;
+polyExtrudeFacet;
+scale -r -p 3.31 3.58 1.76 0.05 0.88 0.88 ;
+polyExtrudeFacet;
+move -r -os -wd -0.2 0 0 ;
+//Roof
+select -r House_Body.f[16:35];
+polyExtrudeFacet;
+scale -r -p 0 6 0 1.1 1.1 1.1 ;
+move -r -os -wd 0 0.08 0 ;
+polyExtrudeFacet;
+move -r -os -wd 0 0.32 0 ;
+polyExtrudeFacet;
+scale -r -p 0 6.4 0 0.9 0.04 0.9 ;
+polyExtrudeFacet;
+move -r -os -wd 0 0.84 0 ;
+scale -r -p 0 7.26 0 .84 1 .97;
+polyExtrudeFacet;
+move -r -os -wd 0 1.23 0 ;
+scale -r -p 0 8.5 0 .67 1 .83;
+polyExtrudeFacet;
+move -r -os -wd 0 1.2 0 ;
+scale -r -p 0 9.7 0 .26 1 .77;
+parent "House_Body" "House";
+//Chimney
+polyCube -name "Chimney" -createUVs 1 -constructionHistory 1;
+move -1.3 8.8 3.1;
+scale 1.87 3.482 1.87;
+select -r Chimney.f[1];
+polyExtrudeFacet;
+scale -r -p -1.5 10.1 3.3 1.2 1 1.2 ;
+polyExtrudeFacet;
+move -r -os -wd 0 0.4 0 ;
+scale -r -p -1.5 10.5 3.3 1.1 1 1.1 ;
+parent "Chimney" "House";
+//Move group
+move -5.56 0 0 "House";
+
+//Stepping Stones
+polyCube -w 1 -h 1 -d 1 -sx 1 -sy 1 -sz 1 -ax 0 1 0 -cuv 4 -ch 1 -name "Step_01";
+move -r -os -wd 0 0 -2.2 ;
+scale -r 1.3 .12 1.6;
+select -r Step_01.e[4:5] Step_01.e[8:9];
+polyBevel -fraction 1 -segments 2;
+select -r "Step_01";
+duplicate;
+move -r -os -wd 2.2 0 0.9; 
+duplicate;
+move -r -os -wd 1.94 0 -1.45;
+/*
+//Assign Mats
+//Black
+select -r Button_01 Button_02 Button_03 Mouth_04 Mouth_03 Mouth_02 Mouth_01 Eye_01 Eye_02 Hat ;
+shadingNode -asShader lambert -name "Black";
+sets -renderable true -noSurfaceShader true -empty -name "BlackSG";
+connectAttr -f Black.outColor BlackSG.surfaceShader;
+assignCreatedShader "lambert" "" Black "Button_01 Button_02 Button_03 Mouth_04 Eye_02 Mouth_03 Mouth_02 Mouth_01 Eye_01 Hat";
+select -r Button_01 Button_02 Button_03 Mouth_04 Mouth_03 Mouth_02 Mouth_01 Eye_01 Eye_02 Hat ;
+select -r Black;
+select -r Button_01 Button_02 Button_03 Mouth_04 Mouth_03 Mouth_02 Mouth_01 Eye_01 Eye_02 Hat ;
+sets -e -forceElement BlackSG;
+setAttr "Black.color" -type double3 0 0 0 ;
+
+//White
+select -r Snowman_Top Snowman_Middle Snowman_Bottom;
+shadingNode -asShader lambert -name "White";
+sets -renderable true -noSurfaceShader true -empty -name "WhiteSG";
+connectAttr -f White.outColor WhiteSG.surfaceShader;
+assignCreatedShader "lambert" "" White "Snowman_Top Snowman_Middle Snowman_Bottom";
+sets -e -forceElement WhiteSG;
+setAttr "White.color" -type double3 1 1 1 ;
+
+//Orange
+select Carrot;
+shadingNode -asShader lambert -name "Orange";
+sets -renderable true -noSurfaceShader true -empty -name "OrangeSG";
+connectAttr -f Orange.outColor OrangeSG.surfaceShader;
+assignCreatedShader "lambert" "" Orange "Carrot";
+sets -e -forceElement OrangeSG;
+setAttr "Orange.color" -type double3 0.53 0.18 0 ;
+
+//Grey
+select Chimney House_Body;
+shadingNode -asShader lambert -name "Grey";
+sets -renderable true -noSurfaceShader true -empty -name "GreySG";
+connectAttr -f Grey.outColor GreySG.surfaceShader;
+assignCreatedShader "lambert" "" Grey "Chimney House_Body";
+sets -e -forceElement GreySG;
+setAttr "Grey.color" -type double3 0.432 0.432 0.432 ;
+
+//Brown
+select House_Body.f[80] House_Body.f[78] House_Body.f[73] House_Body.f[112:249] House_Body.f[16:35] Step_01 Step_02 Step_03 Chimney.f[0:13] ;
+shadingNode -asShader lambert -name "Brown";
+sets -renderable true -noSurfaceShader true -empty -name "BrownSG";
+connectAttr -f Brown.outColor BrownSG.surfaceShader;
+assignCreatedShader "lambert" "" Brown "House_Body.f[80] House_Body.f[78] House_Body.f[73] House_Body.f[112:249] House_Body.f[16:35] Step_01 Step_02 Step_03 Chimney.f[0:13]";
+select House_Body.f[80] House_Body.f[78] House_Body.f[73] House_Body.f[112:249] House_Body.f[16:35] Step_01 Step_02 Step_03 Chimney.f[0:13] ;
+sets -e -forceElement BrownSG;
+setAttr "Brown.color" -type double3 0.362 0.204125 0.120546 ;
+*/
+

@@ -1,4 +1,10 @@
 //Snowman and House Scene
+
+//ground
+polyPlane -w 1 -h 1 -sx 1 -sy 1 -ax 0 1 0 -cuv 2 -ch 1 -name "Ground";
+move -1.68 -.06 0;
+scale 18.94 1 18.94;
+
 //Snowman
 group -em -name "Snowman";
 polySphere -name "Snowman_Bottom" -radius 1 -subdivisionsHeight 15 -subdivisionsAxis 15 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
@@ -92,8 +98,43 @@ scale .06 .04 .06;
 rotate 0 0 58.3;
 polySmooth;
 parent "Button_03" "Snowman";
+//Arms
+polyCylinder -name "Arm_Body_01" -radius 1 -subdivisionsHeight 1 -subdivisionsCaps 0 -subdivisionsAxis 6 -createUVs 3 -constructionHistory 1;
+move 0 1.93 -.77;
+scale .138 .235 .138;
+rotate 49.25 0 0;
+select -r Arm_Body_01.f[6];
+scale -r -p 0 1.78 -0.95 0.7 1 0.7;
+polyExtrudeFacet;
+move -r -os -wd 0 -0.23 -0.05 ;
+scale -r -p 0 1.66 -1.16 0.82 1 0.82 ;
+rotate -r -p 0 1.66 -1.16 -os -fo 44.16 0 0 ;
+polyExtrudeFacet;
+move -r -os -wd 0 -0.3 -0.4 ;
+scale -r -p 0 1.5 -1.4 0.5 0.5 0.5 ;
+select "Arm_Body_01";
+duplicate;
+move -ws 0 2.37 .65;
+rotate -r -os -fo 191.1 0 0 ;
+parent "Arm_Body_01" "Arm_Body_02" "Snowman";
+
+
+/*polyCylinder -name "Arm_Fing_01" -radius 1 -subdivisionsHeight 1 -subdivisionsCaps 0 -subdivisionsAxis 6 -createUVs 3 -constructionHistory 1;
+move -.1 1.5 -1.3;
+scale .05 .13 .05;
+rotate 9.05 71.05 -51.3;
+select -r Arm_Fing_01.f[6];
+scale -r -p -0.21 1.48 -1.3 0.19 1 0.19 ;
+select Arm_Fing_01;
+duplicate;
+move -r -os -wd -0.13 0.25 0.11 ;
+rotate -r -ws -fo -232.04 -60.96 38.52 ;
+parent "Arm_Fing_01" "Arm_01";
+parent "Arm_Fing_02" "Arm_01";*/
+
+
 //Move Group
-move 1.63 0 3.01 "Snowman";
+move 1.63 -.34 3.01 "Snowman";
 scale 1.1 1.1 1.1 "Snowman";
 rotate 0 222 0 "Snowman";
 
@@ -176,6 +217,10 @@ duplicate;
 move -r -os -wd 2.2 0 0.9; 
 duplicate;
 move -r -os -wd 1.94 0 -1.45;
+
+group -em -name "Scene_Objects";
+parent "Step_01" "Step_02" "Step_03" "Snowman" "House" "Ground" "Scene_Objects";
+
 /*
 //Assign Mats
 //Black

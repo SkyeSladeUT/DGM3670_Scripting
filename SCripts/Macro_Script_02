@@ -1,0 +1,81 @@
+{
+	string $objects[];
+	string $obj[];
+	int $i = 0;
+	float $x = 0;
+	float $y = 0;
+	float $scaling = 1;
+	float $radius = 1.5;
+	float $rotz = 30;
+
+	proc CreateSphere(float $r, int $subH, int $subA, vector $translate, vector $rotate, vector $scale){
+	    float $x = $translate.x;
+	    float $y = $translate.y;
+	    float $z = $translate.z;
+		$obj = `polySphere -radius $r -sa $subA -sh $subH`;
+		$objects[size($objects)] = $obj[0];
+		move $x $y $z;
+		$x = $scale.x;
+	    $y = $scale.y;
+	    $z = $scale.z;
+		scale $x $y $z;
+		$x = $rotate.x;
+	    $y = $rotate.y;
+	    $z = $rotate.z;
+		rotate $x $y $z;
+	}
+	proc vector SetVector (float $xv, float $yv, float $zv){
+		vector $vect;
+		$vect = <<$xv, $yv, $zv>>;
+		return $vect;
+	}
+	vector $trans = SetVector(0,0,0);
+	vector $rot =SetVector(0,0,$rotz);
+	vector $scale =SetVector(.85,1,1);
+	for($i = 0; $i < 2; $i++){
+		$trans = SetVector($x, $y*.75, 0);
+		$rot = SetVector(0, 0, $rotz); 
+		CreateSphere($radius, 20, 20, $trans, $rot, $scale);
+		$x++;
+		$y += $scaling;
+		$scaling -= .2;
+		$rotz -= 15;
+
+	}
+	for($i = 0; $i < 2; $i++){
+		$trans = SetVector($x, $y*.75, 0);
+		$rot = SetVector(0, 0, $rotz); 
+		CreateSphere($radius, 20, 20, $trans, $rot, $scale);
+		$x++;
+		$y -= $scaling;
+		$scaling += .2;
+		$rotz -= 15;
+	}
+	for($i = 0; $i < 2; $i++){
+		$trans = SetVector($x, $y*.75, 0);
+		$rot = SetVector(0, 0, $rotz); 
+		CreateSphere($radius, 20, 20, $trans, $rot, $scale);
+		$x++;
+		$y -= $scaling;
+		$scaling -= .2;
+		$rotz += 15;
+	}
+	for($i = 0; $i < 2; $i++){
+		$trans = SetVector($x, $y*.75, 0);
+		$rot = SetVector(0, 0, $rotz); 
+		CreateSphere($radius, 20, 20, $trans, $rot, $scale);
+		$x++;
+		$y += $scaling;
+		$scaling += .2;
+		$rotz += 15;
+	}
+	for($i = 0; $i < 2; $i++){
+		$trans = SetVector($x, $y*.75, 0);
+		$rot = SetVector(0, 0, $rotz); 
+		CreateSphere($radius, 20, 20, $trans, $rot, $scale);
+		$x++;
+		$y += $scaling;
+		$scaling -= .2;
+		$rotz += 15;
+	}
+}

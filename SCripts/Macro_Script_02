@@ -8,13 +8,15 @@
 	float $radius = 1.5;
 	float $rotz = 30;
 	float $scaleadd = 0;
-	proc CreateSphere(float $r, int $subH, int $subA, float $tx, float $ty, float $tz, float $rx, float $ry, float $rz, float $sx, float $sy, float $sz){
+	proc string CreateSphere(float $r, int $subH, int $subA, float $tx, float $ty, float $tz, float $rx, float $ry, float $rz, float $sx, float $sy, float $sz){
 		$obj = `polySphere -radius $r -sa $subA -sh $subH`;
 		$objects[size($objects)] = $obj[0];
+		string $objNode = $obj[1];
 		move $tx $ty $tz;
 		scale $sx $sy $sz;
 		rotate $rx $ry $rz;
 		polySoftEdge -a 180 -ch 1;
+		return $objNode;
 	}
 	proc CreateFeet(float $tx, float $ty, float $tz, float $rx, float $ry, float $rz, float $sx, float $sy, float $sz){
 		$obj = `polyCylinder -r 1 -h 2 -sx 6 -sy 1 -sz 0 -ax 0 1 0 -rcp 0 -cuv 3 -ch 1`;

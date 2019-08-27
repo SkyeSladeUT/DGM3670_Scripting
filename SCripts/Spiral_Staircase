@@ -1,0 +1,17 @@
+{
+	float $rad = 1;
+	int $NumOfSteps = 20;
+	float $StairHeight = 10;
+	float $StepHeight = $StairHeight/$NumOfSteps;
+	float $StairWidth = 10;
+	float $RotationDegree = 15;
+
+	proc string[] CreateSpiralStep(){
+		string $obj[] = `polyCube`
+	}
+	
+	for(int $i = 0; $i < $NumOfSteps; $i++){
+		
+	}
+	
+}

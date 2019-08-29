@@ -1,16 +1,30 @@
 {
 	float $rad = 1;
-	int $NumOfSteps = 20;
+	//User Set Height
 	float $StairHeight = 10;
-	float $StepHeight = $StairHeight/$NumOfSteps;
-	float $StairWidth = 10;
-	float $RotationDegree = 15;
+	//User Set Step Height
+	float $StepHeight = .5;
+	//Set Steps from Variables
+	int $NumOfSteps = $StairHeight/$StepHeight;
+	//User Set Width
+	float $StairWidth = 5.5;
+	float $StairRadius = $StairWidth/2;
+	float $DegreeFromDist = 15.0/-2.75;
+	float $RotationDegree = ($StairWidth/2.0)* $DegreeFromDist;
 
+	//15 degrees -2.75 away from center
+	
 	proc string[] CreateSpiralStep(){
-		string $obj[] = `polyCube`
+		string $obj[] = `polyCube`;
+		scale 2 $StepHeight 1 $obj[0];
+		move $StairRadius 0 0 $obj[0];
+		return $obj;
 	}
 	
 	for(int $i = 0; $i < $NumOfSteps; $i++){
+		string $step[] = CreateSpiralStep();
+		rotate -ws -p 0 0 0 0 $RotationDegree*$i 0 $step[0];
+		move 0 $StepHeight*i 0 $step[0];
 		
 	}
 	

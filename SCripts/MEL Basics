@@ -43,3 +43,39 @@ print($names);
 	}
 	
 }
+/*
+String Manipulation
+$obj = ["pShere1", "pSphere2"]
+polyExtrude .... $obj[0] + ".f[32]";
+renaming 
+$obj = `rename $obj "Ball"`;
+always specify the object whenever you move/rotate/scale
+*/
+
+/*
+ls -sl will spit out a list of what is selected
+ls -sl -o will select the object of the components not the components themselves
+if(Condition){...}
+else if(Condition2){...}
+else {...}
+
+check to see if something is selected
+string $sels[] = `ls -sl`;
+if (size($sels) > 0){...}
+else {error ("Must select object");}
+error will terminate the script as soon as it is called
+
+"\n" = new line
+
+if(!size($objs)){} is the same as saying if there is no objects in the array
+0 = false; 1 = true;
+
+Assignment
+Get object
+Select how many duplicates
+Create range of where they will spawn
+
+*/
+
+
+

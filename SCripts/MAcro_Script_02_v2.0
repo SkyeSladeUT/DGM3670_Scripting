@@ -198,9 +198,9 @@
 	CreateBase();
 	CreateBuildingWindow();
 	CreateDoor();
-    $getIndexName[0] = $objects[1];
-    $objects = stringArrayRemove ($getIndexName,$objects);
-	delete $getIndexName[0];
+    $NameToDelete[0] = $objects[1];
+    $objects = stringArrayRemove ($NameToDelete,$objects);
+	delete $NameToDelete[0];
 	$objects = `polyUnite $objects`;
 	delete -constructionHistory;
 	$objects[0] = `rename $objects[0] Building`;

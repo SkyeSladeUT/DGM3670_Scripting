@@ -77,5 +77,18 @@ Create range of where they will spawn
 
 */
 
+{
+	proc void KimInsultGenerator(string phrase){
+		print("You are a " + phrase + "!\n");
+	}
+	
+}
+
+/*
+floor rounds down
+floor `rand -10 10`;
+
+*/
+
 
 

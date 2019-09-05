@@ -1,0 +1,34 @@
+{
+    vector $minT = << 1, 1, 1 >>, $maxT = << 10, 10, 10 >>, $minR = << 0, 0, 0 >>, $maxR = << 90, 90, 90 >>, $minS = << 1, 1, 1 >>, $maxS = << 2, 2, 2 >>;
+    
+	proc string[] RandomPlacement(int $numDuplicates, vector $TransMin, vector $TransMax, vector $RotMin, vector $RotMax, vector $ScaleMin, vector $ScaleMax){
+		string $obj[] = `ls -sl -o`;
+		string $dupObj[];
+		string $duplicatedObjs[];
+		int $i;
+		if(!size($obj)){
+			error ("Must select an object\n");
+		}
+		vector $RandTrans = << 0, 0, 0>>;
+		vector $RandRot = << 0, 0, 0>>;
+		vector $RandScale = << 1, 1, 1>>;
+		for($i = 0; $i < $numDuplicates; $i++){
+		    $dupObj = `duplicate $obj`;
+			$RandTrans = `rand $minT $maxT`;
+			$RandRot = `rand $minR $maxR`;
+			$RandScale = `rand $minS $maxS`;
+		    for($o in $dupObj){
+		        $duplicateObjs[$i] = $dupObj[0];
+		        move -ws ($RandTrans.x) ($RandTrans.y) ($RandTrans.z) $duplicateObjs[$i];
+		        rotate -os ($RandRot.x) ($RandRot.y) ($RandRot.z) $duplicateObjs[$i];
+		        scale -cp ($RandScale.x) ($RandScale.y) ($RandScale.z) $duplicateObjs[$i];
+		    }
+		}
+		return $duplicatedObjs;
+	}
+	
+	RandomPlacement(5, $minT, $maxT, $minR, $maxR, $minS, $maxS);
+	
+	
+}
+

@@ -1,4 +1,5 @@
 {
+	//Random Generation
     vector $minT = << -10, -10, -10 >>, $maxT = << 10, 10, 10 >>, $minR = << 0, 0, 0 >>, $maxR = << 90, 90, 90 >>, $minS = << .1, .1, .1 >>, $maxS = << 2, 2, 2 >>;
     int $DuplicateNumber = 10;
     
@@ -34,6 +35,109 @@
 	
 	RandomPlacement($DuplicateNumber, $minT, $maxT, $minR, $maxR, $minS, $maxS);
 	
+	//UI window
+	global string $MinTranslationX = "X Translation Minimum"; 
+			
+	global proc floatValueChanged() {
+		global string $floatFieldName;
+		$value = `floatField -query -value $MinTranslationX`;
+		print("newValue="+ $value +"\n");
+	}
+	{
+		string $window = `window`;
+		rowColumnLayout -numberOfColumns 3;
+		floatField -precision 2 -step .01; floatField -precision 2 -step .01; floatField -precision 2 -step .01;
+		floatField -precision 2 -step .01; floatField -precision 2 -step .01; floatField -precision 2 -step .01;
+		floatField -precision 2 -step .01; floatField -precision 2 -step .01; floatField -precision 2 -step .01;
+		showWindow $window;
+	}
 	
+	{		
+
+		window;
+
+
+			columnLayout;
+	
+
+				frameLayout -collapsable true -label "Minimum Translation";
+	
+
+					rowLayout;
+	
+
+						floatField -precision 2 -step .01; 
+						floatField -precision 2 -step .01; 
+						floatField -precision 2 -step .01;
+	
+					setParent ..;
+				setParent ..;
+	
+
+				frameLayout -collapsable true -label "Maximum Translation";
+	
+
+					columnLayout;
+	
+						floatField -precision 2 -step .01; 
+						floatField -precision 2 -step .01; 
+						floatField -precision 2 -step .01;
+	
+					setParent ..;
+				setParent ..;
+				
+				frameLayout -collapsable true -label "Minimum Rotation";
+	
+
+					rowLayout;
+	
+
+						floatField -precision 2 -step .01; 
+						floatField -precision 2 -step .01; 
+						floatField -precision 2 -step .01;
+	
+					setParent ..;
+				setParent ..;
+				
+				frameLayout -collapsable true -label "Maximum Rotation";
+	
+
+					columnLayout;
+	
+						floatField -precision 2 -step .01; 
+						floatField -precision 2 -step .01; 
+						floatField -precision 2 -step .01;
+	
+					setParent ..;
+				setParent ..;
+				
+				frameLayout -collapsable true -label "Minimum Scale";
+	
+
+					rowLayout;
+	
+
+						floatField -precision 2 -step .01; 
+						floatField -precision 2 -step .01; 
+						floatField -precision 2 -step .01;
+	
+					setParent ..;
+				setParent ..;
+				
+				frameLayout -collapsable true -label "Maximum Scale";
+	
+
+					columnLayout;
+	
+						floatField -precision 2 -step .01; 
+						floatField -precision 2 -step .01; 
+						floatField -precision 2 -step .01;
+	
+					setParent ..;
+				setParent ..;
+
+
+		showWindow;
+	}
 }
 

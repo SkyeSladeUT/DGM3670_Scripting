@@ -87,8 +87,9 @@ Create range of where they will spawn
 /*
 floor rounds down
 floor `rand -10 10`;
-
 */
-
+/*
+	format - stringArg $name1[0] -stringArg $name2[0] "Our names are ^1s and ^2s"; 
+*/
 
 

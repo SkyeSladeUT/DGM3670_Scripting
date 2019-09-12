@@ -1,0 +1,35 @@
+{
+	string $objname = "L_Arm_#_Geo";
+	proc RenameOBJs(string $objectName){
+		string $objects[] = `ls -sl -o`;
+		if(!size($objects)){
+			error ("You must select an object");
+		}
+		int $numObjs = `size($objects)`;
+		string $numberObjects = "" + $numObjs;
+		int $numStrings;
+		string $seperationChar = "#";
+		string $strings[];
+		int $i;
+		int $j;
+		string $fullName;
+		string $numberName;
+		$numStrings = `tokenize $objectName $seperationChar $strings`;
+		if($numStrings > 2){
+			error ("String is split too many ways");
+		}
+		string $currentNum;
+		for($i = 0; $i < size($objects); $i++){
+			$currentNum = "" + $i;
+			$numberName = "";
+			for($j = 0; $j < (size($numberObjects) - size($currentNum)) ; $j++){
+				$numberName += "0";
+			}
+			$numberName += $currentNum;
+			$fullName = $strings[0] + $numberName + $strings[1];
+			$objects[$i] = `rename $objects[$i] $fullName`;
+		}
+	}
+	RenameOBJs($objname);
+
+}

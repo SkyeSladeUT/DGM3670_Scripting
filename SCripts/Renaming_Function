@@ -30,7 +30,7 @@
 		}
 		string $currentNum;
 		for($i = 0; $i < size($objects); $i++){
-			$currentNum = "" + $i;
+			$currentNum = "" + ($i + 1);
 			$numberName = "";
 			for($j = 0; $j < (size($numberObjects) - size($currentNum)) ; $j++){
 				$numberName += "0";

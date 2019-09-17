@@ -1,5 +1,5 @@
 {
-	string $objname = "L_Arm_#_Geo";
+	string $objname = "L_Arm_##_Geo";
 	proc RenameOBJs(string $objectName){
 		string $objects[] = `ls -sl -o`;
 		if(!size($objects)){
@@ -14,9 +14,19 @@
 		int $j;
 		string $fullName;
 		string $numberName;
+		string $prefix;
+		string $suffix;
 		$numStrings = `tokenize $objectName $seperationChar $strings`;
 		if($numStrings > 2){
 			error ("String is split too many ways");
+		}
+		if(startsWith($objectName, "#")){
+			$prefix = "_";
+			$suffix = $strings[0];
+		}
+		else{
+			$prefix = $strings[0];
+			$suffix = $strings[1];
 		}
 		string $currentNum;
 		for($i = 0; $i < size($objects); $i++){
@@ -26,7 +36,7 @@
 				$numberName += "0";
 			}
 			$numberName += $currentNum;
-			$fullName = $strings[0] + $numberName + $strings[1];
+			$fullName = $prefix + $numberName + $suffix;
 			$objects[$i] = `rename $objects[$i] $fullName`;
 		}
 	}

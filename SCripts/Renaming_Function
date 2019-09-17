@@ -1,26 +1,20 @@
 {
-	string $objname = "L_Arm_##_Geo";
 	proc RenameOBJs(string $objectName){
 		string $objects[] = `ls -sl -o`;
 		if(!size($objects)){
 			error ("You must select an object");
 		}
 		int $numObjs = `size($objects)`;
-		string $numberObjects = "" + $numObjs;
-		int $numStrings;
-		string $seperationChar = "#";
+		string $numObjsString = "" + $numObjs;
+		int $numStrings, $i, $j;
 		string $strings[];
-		int $i;
-		int $j;
-		string $fullName;
-		string $numberName;
-		string $prefix;
-		string $suffix;
+		string $fullName, $numberName, $prefix, $suffix, $seperationChar = "#";
 		$numStrings = `tokenize $objectName $seperationChar $strings`;
+		int $numNums = (size($objectName) - size($strings[0]) - size($strings[1])); 
 		if($numStrings > 2){
 			error ("String is split too many ways");
 		}
-		if(startsWith($objectName, "#")){
+		if(startsWith($objectName, $seperationChar)){
 			$prefix = "_";
 			$suffix = $strings[0];
 		}
@@ -32,14 +26,46 @@
 		for($i = 0; $i < size($objects); $i++){
 			$currentNum = "" + ($i + 1);
 			$numberName = "";
-			for($j = 0; $j < (size($numberObjects) - size($currentNum)) ; $j++){
-				$numberName += "0";
+			if($numNums < size($numObjsString)){
+				for($j = 0; $j < (size($numObjsString) - size($currentNum)) ; $j++){
+					$numberName += "0";
+				}
 			}
+			else{
+				for($j = 0; $j < ($numNums - size($currentNum)) ; $j++){
+					$numberName += "0";
+				}
+			}
+
 			$numberName += $currentNum;
 			$fullName = $prefix + $numberName + $suffix;
 			$objects[$i] = `rename $objects[$i] $fullName`;
 		}
 	}
-	RenameOBJs($objname);
 
+}
+
+global string $NewName, $TextFieldName;
+
+global proc Rename(){
+    global string $NewName, $TextFieldName;
+	$NewName = `textField -query -text $TextFieldName`;
+	if(size($NewName) > 0){
+	    RenameOBJs($NewName);
+	}	
+}
+
+{
+	string $window = `window -t "Rename Objects"`;
+		columnLayout;
+			frameLayout -collapsable false -label "New Name";
+				rowLayout -numberOfColumns 1;
+					$TextFieldName = ` textField `; 
+				setParent ..;
+			setParent ..;
+			
+			rowLayout -numberOfColumns 1;
+				button -label "Rename" -command "Rename();";
+				
+		showWindow $window;
 }

@@ -1,0 +1,27 @@
+global string $window, $windowCode;
+global int $windowHeight, $windowWidth;
+global proc getWindowInfo(){
+    global string $window, $windowCode;
+    global int $windowHeight, $windowWidth;
+    $windowHeight = `window -q -h $window`;
+    $windowWidth = `window -q -w $window`; 
+    $windowCode = "$window = `window -h " + $windowHeight + " -w " + $windowWidth + "`;\n";
+    $windowCode += "showWindow $window;";
+    print($windowCode + "\n");
+    //return $windowCode;
+}
+   $window = `window -menuBar true -width 200 -t "Test Window Layout"`;
+			menu -label "Add" -tearOff true;
+				menuItem -label "Text"; //TO DO add -command
+				menuItem -label "Int Input"; //TO DO add -command
+				menuItem -label "Float Input"; //TO DO add -command
+				menuItem -label "Text Input"; //TO DO add -command
+        columnLayout;
+        button -label "Create" -command "getWindowInfo();";
+    showWindow $window;
+   
+global proc runStringCode(string $code){
+    eval($code);
+}
+print($windowCode);
+runStringCode($windowCode);

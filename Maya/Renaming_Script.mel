@@ -58,13 +58,8 @@ global proc Rename(){
 {
 	string $window = `window -t "Rename Objects"`;
 		columnLayout;
-			frameLayout -collapsable false -label "New Name";
-				rowLayout -numberOfColumns 1;
-					$TextFieldName = ` textField `; 
-				setParent ..;
-			setParent ..;
-			
-			rowLayout -numberOfColumns 1;
+				text -label "New Name";
+				$TextFieldName = ` textField `; 
 				button -label "Rename" -command "Rename();";
 				
 		showWindow $window;

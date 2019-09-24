@@ -1,0 +1,13 @@
+//xform -boundingBox
+//midpoint formula
+//(x1+x2)/2, (y1+y2)/2, (z1+z2)/2
+{
+	proc vector GetCenterOfAll(){
+		string $objects = `ls -sl`;
+		int $xPos = 0, $yPos = 0, $zPos = 0;
+		for($obj in $objects){
+			$xPos += 
+		}
+	}
+
+}

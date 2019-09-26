@@ -1,0 +1,119 @@
+{
+	proc GetCenterOfAll(string $objects[]){
+		if(!size($objects)){
+		    error ("must select an object");
+		}
+		float $xPos = 0, $yPos = 0, $zPos = 0;
+		float $bounding[];
+		print($objects);
+		string $words[];
+        for($i = 0; $i < size($objects); $i++){
+            int $tokens = `tokenize $objects[$i] ":" $words`;
+            if($tokens < 1){
+                string $words2[];
+                tokenize $words[0] "[" $words2;
+                int $begin = (int)$words2[1];
+                tokenize $words[1] "]" $words2;
+                int $end = (int)$words2[0];
+                string $obj;
+                for($j = $begin; $j <= $end; $j++){
+                    $obj = $words[0] + "[" + $j + "]";
+                    $bounding = `xform -q -ws -boundingBox $obj`;
+                    $xPos += (($bounding[0] + $bounding[3])/2);
+                    $yPos += (($bounding[1] + $bounding[4])/2);
+                    $zPos += (($bounding[2] + $bounding[5])/2); 
+                }
+            }
+            else{
+                $bounding = `xform -q -ws -boundingBox $objects[$i]`;
+                $xPos += (($bounding[0] + $bounding[3])/2);
+                $yPos += (($bounding[1] + $bounding[4])/2);
+                $zPos += (($bounding[2] + $bounding[5])/2);
+            }
+        }
+        $xPos = ($xPos/size($objects));
+        $yPos = ($yPos/size($objects));
+        $zPos = ($zPos/size($objects));
+		spaceLocator -absolute -p $xPos $yPos $zPos;
+	}
+	
+	proc GetCenterOfIndividual(string $objects[]){
+	    select $objects;
+		string $FullObjects[] = `ls -sl -o`;
+		if(!size($objects)){
+		    error ("must select an object");
+		}
+		if(size($FullObjects) > 1){
+			float $xPos[], $yPos[], $zPos[];
+			int $numComp[];
+			for($i = 0; $i < size($FullObjects); $i++){
+				$xPos[$i] = 0;
+				$yPos[$i] = 0;
+				$zPos[$i] = 0;
+				$numComp[$i] = 0;
+			}
+			float $bounding[];
+			string $words[];
+			int $ObjInd;
+			print($FullObjects);
+			for($i = 0; $i < size($objects); $i++){
+				tokenize $objects[$i] "." $words;
+				for($k = 0; $k < size($FullObjects); $k++){
+					if($words[0] == $FullObjects[$k]){
+						$ObjInd = $k;
+						print($ObjInd);
+					}
+				}
+				print("\n");
+				int $tokens = `tokenize $objects[$i] ":" $words`;
+				if($tokens < 1){
+					string $words2[];
+					tokenize $words[0] "[" $words2;
+					int $begin = (int)$words2[1];
+					tokenize $words[1] "]" $words2;
+					int $end = (int)$words2[0];
+					string $obj;
+					for($j = $begin; $j <= $end; $j++){
+						$obj = $words[0] + "[" + $j + "]";
+						$bounding = `xform -q -ws -boundingBox $obj`;
+						$xPos[$ObjInd] += (($bounding[0] + $bounding[3])/2);
+						$yPos[$ObjInd] += (($bounding[1] + $bounding[4])/2);
+						$zPos[$ObjInd] += (($bounding[2] + $bounding[5])/2); 
+						$numComp[$ObjInd]+=1;
+					}
+				}
+				else{
+					$bounding = `xform -q -ws -boundingBox $objects[$i]`;
+					$xPos[$ObjInd] += (($bounding[0] + $bounding[3])/2);
+					$yPos[$ObjInd] += (($bounding[1] + $bounding[4])/2);
+					$zPos[$ObjInd] += (($bounding[2] + $bounding[5])/2);
+					$numComp[$ObjInd] += 1;
+				}
+			}
+			for($i = 0; $i < size($FullObjects); $i++){
+				$xPos[$i] = ($xPos[$i]/$numComp[$i]);
+				$yPos[$i] = ($yPos[$i]/$numComp[$i]);
+				$zPos[$i] = ($zPos[$i]/$numComp[$i]);
+				spaceLocator -absolute -p $xPos[$i] $yPos[$i] $zPos[$i];
+			}
+
+		}
+		else{
+			GetCenterOfAll($objects);
+		}
+		
+	}
+	
+	proc GetCenters(){
+	    string $objects[] = `ls -sl`;
+	    if(!size($objects)){
+	        error("must select an object");
+	    }
+	    GetCenterOfAll($objects);
+	    GetCenterOfIndividual($objects);
+	}
+	
+	GetCenters();
+	
+	
+};

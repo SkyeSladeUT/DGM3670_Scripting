@@ -5,55 +5,84 @@
 	    if(!size($objects)){
 		    error ("must select an object");
 		}
-		float $xPos = 0, $yPos = 0, $zPos = 0;
-		float $xRot = 0, $yRot = 0, $zRot = 0;
-		float $bounding[];
-		string $groupName = `group -em`;
-		string $locator[];
-		if($CenterofAll){
-			$bounding = `xform -q -ws -boundingBox $objects`;
-			$xPos = ($bounding[0] + $bounding[3])/2;
-			$yPos = ($bounding[0] + $bounding[3])/2;
-			$zPos = ($bounding[0] + $bounding[3])/2;
-			$locator = `spaceLocator`;
-			move -ws $xPos $yPos $zPos $locator[0];
-		}
+		float $xPos = 0, $yPos = 0, $zPos = 0, $xTotal = 0, $yTotal = 0, $zTotal = 0, $xRot = 0, $yRot = 0, $zRot = 0;
+		float $bounding[], $rotation[];
+		string $CenterIndGroup, $ObjectName, $obj;
+		int $numberofObjects = 0, $tokens, $begin, $end;
+		string $locator[], $words[], $words2[];
 		if($CenterofInd){
-			string $words[];
-			for($i = 0; $i < size($objects); $i++){
-			    tokenize $objects[$i] "[" $words;
-			    string $ObjectName = $words[0];
-				int $tokens = `tokenize $objects[$i] ":" $words`;
-				if($tokens > 1){
-					string $words2[];
-					tokenize $words[0] "[" $words2;
-					int $begin = (int)$words2[1];
-					tokenize $words[1] "]" $words2;
-					int $end = (int)$words2[0];
-					string $obj;
-					for($j = $begin; $j <= $end; $j++){
-						$obj = $ObjectName + "[" + $j + "]";
-						$bounding = `xform -q -ws -boundingBox $obj`;
-						$xPos = (($bounding[0] + $bounding[3])/2);
-						$yPos = (($bounding[1] + $bounding[4])/2);
-						$zPos = (($bounding[2] + $bounding[5])/2);
-						$locator = `spaceLocator`;
-						move -ws $xPos $yPos $zPos $locator[0];
-					}						
-                }
-				else{
-					$bounding = `xform -q -ws -boundingBox $objects[$i]`;
+		    print("Create Group");
+			$CenterIndGroup = `group -em -n "Individual_Locators"`;
+		}
+		for($i = 0; $i < size($objects); $i++){
+			tokenize $objects[$i] "[" $words;
+			$ObjectName = $words[0];
+			$tokens = `tokenize $objects[$i] ":" $words`;
+			if($tokens > 1){
+				tokenize $words[0] "[" $words2;
+				$begin = (int)$words2[1];
+				tokenize $words[1] "]" $words2;
+				$end = (int)$words2[0];
+				for($j = $begin; $j <= $end; $j++){
+					$obj = $ObjectName + "[" + $j + "]";
+					$bounding = `xform -q -ws -boundingBox $obj`;
+					$rotation = `xform -q -ws -rotation $obj`;
+					$xRot += $rotation[0];
+					$yRot += $rotation[1];
+					$zRot += $rotation[2];
 					$xPos = (($bounding[0] + $bounding[3])/2);
 					$yPos = (($bounding[1] + $bounding[4])/2);
 					$zPos = (($bounding[2] + $bounding[5])/2);
+					$xTotal += $xPos;
+					$yTotal += $yPos;
+					$zTotal += $zPos;
+					$numberofObjects++;
+					if($CenterofInd){
+						$locator = `spaceLocator`;
+						move -ws $xPos $yPos $zPos $locator[0];
+						if($OrientationOn){
+							rotate -cp $rotation[0] $rotation[1] $rotation[2] $locator[0];
+						}
+						parent $locator $CenterIndGroup;
+					}
+				}						
+            }
+			else{
+				$bounding = `xform -q -ws -boundingBox $objects[$i]`;
+				$rotation = `xform -q -ws -rotation $objects[$i]`;
+				$xRot += $rotation[0];
+				$yRot += $rotation[1];
+				$zRot += $rotation[2];
+				$xPos = (($bounding[0] + $bounding[3])/2);
+				$yPos = (($bounding[1] + $bounding[4])/2);
+				$zPos = (($bounding[2] + $bounding[5])/2);
+				$xTotal += $xPos;
+				$yTotal += $yPos;
+				$zTotal += $zPos;
+				$numberofObjects++;
+				if($CenterofInd){
 					$locator = `spaceLocator`;
 					move -ws $xPos $yPos $zPos $locator[0];
+					if($OrientationOn){
+						rotate -cp $rotation[0] $rotation[1] $rotation[2] $locator[0];
+					}
+					parent $locator $CenterIndGroup;
 				}
+			}
+		}
+		if($CenterofAll){
+			$locator = `spaceLocator`;
+			$xTotal = ($xTotal/$numberofObjects);
+			$yTotal = ($yTotal/$numberofObjects);
+			$zTotal = ($zTotal/$numberofObjects);
+			move -ws $xTotal $yTotal $zTotal $locator[0];
+			if($OrientationOn){
+				rotate -cp $xRot $yRot $zRot $locator[0];
 			}
 		}
 	}
 	
-	GetCenters(1, 1, 0);
+	GetCenters(1, 1, 1);
 	
 	
 }

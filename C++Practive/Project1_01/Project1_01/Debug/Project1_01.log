@@ -1,0 +1,3 @@
+﻿  Window.cpp
+c:\users\10802160\source\repos\project1_01\project1_01\window.cpp(103): warning C4715: 'WindowProcedure': not all control paths return a value
+  Project1_01.vcxproj -> C:\Users\10802160\source\repos\Project1_01\Debug\Project1_01.exe

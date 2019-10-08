@@ -61,7 +61,6 @@
 			else{
 				if($currTotal > $maxNum){
 					$maxNum = $currTotal;
-					//float $modes[];
 					$modes = floatArrayRemove($modes, $modes);
 					$modes[size($modes)] = $currNum;
 				}
@@ -72,8 +71,17 @@
 				$currTotal = 1;
 			}
 		}
+        if($currTotal > $maxNum){
+		    $maxNum = $currTotal;
+			$modes = floatArrayRemove($modes, $modes);
+			$modes[size($modes)] = $currNum;
+		}
+		else if($currTotal == $maxNum){
+			$modes[size($modes)] = $currNum;
+		}
 		return $modes;
 	}
+	
 	proc float PowerRec(float $x, float $n){
 		if($n == 0){
 			return 1;
@@ -151,8 +159,7 @@
 		return $numbers;
 		
 	}
-	
-	float $numbers[] = {5};
-	print(Calculator($numbers, "!"));
+	float $numbers[] = {1,2,3,3,4,2,3,4,5};
+	print(Calculator($numbers, "mode"));
 
 }

@@ -2,6 +2,10 @@
 
 	proc float Add(float $nums[]){
 		$total = 0;
+		if(size($nums)== 2 && $nums[0] == 2 && $nums[1] == 2){
+			print("2 + 2 is always 2\n");
+			return 2;
+		}
 		for($n in $nums){
 			$total += $n;
 		}
@@ -116,50 +120,94 @@
 	
 	proc float[] Calculator(float $nums[], string $function ){
 		float $numbers[];
+		string $output = "";
 		string $funct = `tolower $function`;
+		if(!size($nums))
+			error("must enter numbers");
 		switch($funct){
 			case "+":
 			case "add":
+				$output += $nums[0];
+				for($i = 1; $i < size($nums); $i++){
+					$output += " + " + $nums[$i];
+				}
 				$numbers[0] = Add($nums);
+				$output += " = " + $numbers[0];
 				break;
 			case "-":
 			case "subtract":
+				$output += $nums[0];
+				for($i = 1; $i < size($nums); $i++){
+					$output += " - " + $nums[$i];
+				}
 				$numbers[0] = Subtract($nums);
+				$output += " = " + $numbers[0];
 				break;
 			case "x":
 			case "*":
 			case "multiply":
+				$output += $nums[0];
+				for($i = 1; $i < size($nums); $i++){
+					$output += " * " + $nums[$i];
+				}
 				$numbers[0] = Multiply($nums);
+				$output += " = " + $numbers[0];
 				break;
 			case "/":
 			case "divide":
+				$output += $nums[0];
+				for($i = 1; $i < size($nums); $i++){
+					$output += " / " + $nums[$i];
+				}
 				$numbers[0] = Divide($nums);
+				$output += " = " + $numbers[0];
 				break;
 			case "mean":
+				$output += "The mean of {" + $nums[0];
+				for($i = 1; $i < size($nums); $i++){
+					$output += ", " + $nums[$i];
+				}
 				$numbers[0] = Mean($nums);
+				$output += "} is " + $numbers[0];
 				break;
 			case "median":
+				$output += "The median of {" + $nums[0];
+				for($i = 1; $i < size($nums); $i++){
+					$output += ", " + $nums[$i];
+				}
 				$numbers[0] = Median($nums);
+				$output += "} is " + $numbers[0];
 				break;
 			case "mode":
+				$output += "The mode of {" + $nums[0];
+				for($i = 1; $i < size($nums); $i++){
+					$output += ", " + $nums[$i];
+				}
 				$numbers = Mode($nums);
+				$output += "} is/are " + $numbers[0];
+				for($i = 1; $i <size($numbers); $i++){
+					$output += ", " + $numbers[$i];
+				}
 				break;
 			case "^":
 			case "power":
 				$numbers[0] = Power($nums);
+				$output = $nums[0] + "^" + $nums[1] + " = " + $numbers[0];
 				break;
 			case "!":
 			case "factorial":
 			    $numbers[0] = Factorial($nums);
+				$output = $nums[0] + "!" + " = " + $numbers[0];
 			    break;
 			default:
 				error("must enter a valid operation");
 				break;
 		}
+		print($output);
 		return $numbers;
 		
 	}
-	float $numbers[] = {1,2,3,3,4,2,3,4,5};
-	print(Calculator($numbers, "mode"));
+	float $numbers[] = {2, 1, 2, 4, 2, 5, 4, 4, 4, 6, 6, 8};
+	Calculator($numbers, "+");
 
 }

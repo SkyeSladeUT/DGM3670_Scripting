@@ -56,7 +56,12 @@ global proc Rename(){
 }
 
 {
-	string $window = `window -t "Rename Objects"`;
+    string $window;
+    if(`window -exists $window`){
+        deleteUI -window $window;
+    }
+    
+	$window = `window -t "Rename Objects"`;
 		columnLayout;
 				text -label "New Name";
 				$TextFieldName = ` textField `; 

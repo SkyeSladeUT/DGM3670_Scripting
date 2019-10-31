@@ -203,11 +203,47 @@
 				error("must enter a valid operation");
 				break;
 		}
-		print($output);
+		print($output + "\n");
 		return $numbers;
 		
 	}
-	float $numbers[] = {2, 1, 3, 5, 2, 3, 4, 4, 3, 3};
-	Calculator($numbers, "+");
+	//float $numbers[] = {2, 1, 3, 5, 2, 3, 4, 4, 3, 3};
+	//Calculator($numbers, "+");
+	
+	global string $NumbersString, $OperationString;
+	
+	global proc CallFunc(){
+		string $numstring = `textField -q -text $NumbersString`;
+		string $operation = `textField -q -text $OperationString`;
+		string $nums[];
+		tokenize $numstring "," $nums; 
+		float $numbers[];
+		for($i = 0; $i < size($nums); $i++){
+			$nums[$i] = `strip($nums[$i])`;
+			$numbers[$i] = (float)$nums[$i];
+		}
+		Calculator($numbers, $operation);
+	}
+
+	global proc CreateWindow(){
+		string $window;
+		if(`window -exists $window`)
+			deleteUI -window $window;
+		$window = `window -t "Rename Objects"`;
+			string $column = `columnLayout -p $window`;
+				string $frame1 = `frameLayout -p $column -collapsable false -label "Numbers"`;
+					string $row1 = `rowLayout -p $frame1 -numberOfColumns 1`;
+						$NumbersString = ` textField -p $row1 `; 
+				string $frame2 = `frameLayout -p $column -collapsable false -label "Operation"`;
+					string $row2 = `rowLayout -p $frame2 -numberOfColumns 1`;
+						$OperationString = ` textField -p $row2 `; 
+			
+				string $row3 = `rowLayout -p $column -numberOfColumns 1`;
+					button -p $row3 -label "Calculate" -command "CallFunc();";
+				
+		showWindow $window;
+	}
+	
+	CreateWindow();
 
 }

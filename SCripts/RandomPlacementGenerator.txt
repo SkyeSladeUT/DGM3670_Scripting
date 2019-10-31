@@ -32,111 +32,112 @@
 		}
 		return $duplicatedObjs;
 	}
-}
 
 	//RandomPlacement($DuplicateNumber, $minT, $maxT, $minR, $maxR, $minS, $maxS);
-global string $NumDuplicates = "", $MinTX = "", $MinTY = "", $MinTZ = "", $MaxTX = "", $MaxTY = "", $MaxTZ = "",
-	$MinRX = "", $MinRY = "", $MinRZ = "", $MaxRX = "", $MaxRY = "", $MaxRZ = "",
-	$MinSX = "", $MinSY = "", $MinSZ = "", $MaxSX = "", $MaxSY = "", $MaxSZ = "";
-global int  $numDuplicates = 0;
+global string $NumDuplicates, $MinTX, $MinTY, $MinTZ, $MaxTX, $MaxTY, $MaxTZ,
+	$MinRX, $MinRY, $MinRZ, $MaxRX, $MaxRY, $MaxRZ,
+	$MinSX, $MinSY, $MinSZ, $MaxSX, $MaxSY, $MaxSZ;
+/*global int  $numDuplicates = 0;
 global float $minTX = 0, $minTY = 0, $minTZ = 0, $maxTX = 0, $maxTY = 0, $maxTZ = 0,
 	$minRX = 0, $minRY = 0, $minRZ = 0, $maxRX = 0, $maxRY = 0, $maxRZ = 0,
-	$minSX = 0, $minSY = 0, $minSZ = 0, $maxSX = 0, $maxSY = 0, $maxSZ = 0;	
+	$minSX = 0, $minSY = 0, $minSZ = 0, $maxSX = 0, $maxSY = 0, $maxSZ = 0;	*/
 global proc Randomize(){
-    global string $NumDuplicates, $MinTX, $MinTY, $MinTZ, $MaxTX, $MaxTY, $MaxTZ,
+    /*global string $NumDuplicates, $MinTX, $MinTY, $MinTZ, $MaxTX, $MaxTY, $MaxTZ,
 	    $MinRX, $MinRY, $MinRZ, $MaxRX, $MaxRY, $MaxRZ,
-	    $MinSX, $MinSY, $MinSZ, $MaxSX, $MaxSY, $MaxSZ;
-    global int  $numDuplicates;
-    global float $minTX, $minTY, $minTZ, $maxTX, $maxTY, $maxTZ,
+	    $MinSX, $MinSY, $MinSZ, $MaxSX, $MaxSY, $MaxSZ;*/
+    int  $numDuplicates;
+    float $minTX, $minTY, $minTZ, $maxTX, $maxTY, $maxTZ,
 	    $minRX, $minRY, $minRZ, $maxRX, $maxRY, $maxRZ,
 	    $minSX, $minSY, $minSZ, $maxSX, $maxSY, $maxSZ;	 
-	 $numDuplicates = `intField -query -value $NumDuplicates`;
+	$numDuplicates = `intField -query -value $NumDuplicates`;
     $minTX = `floatField -query -value $MinTX`;
     $minTY = `floatField -query -value $MinTY`;
     $minTZ = `floatField -query -value $MinTZ`;
     $maxTX = `floatField -query -value $MaxTX`;
     $maxTY = `floatField -query -value $MaxTY`;
     $maxTZ = `floatField -query -value $MaxTZ`;
-	 $minRX = `floatField -query -value $MinRX`;
-	 $minRY = `floatField -query -value $MinRY`;
-	 $minRZ = `floatField -query -value $MinRZ`;
-	 $maxRX = `floatField -query -value $MaxRX`;
-	 $maxRY = `floatField -query -value $MaxRY`;
-	 $maxRZ = `floatField -query -value $MaxRZ`;
-	 $minSX = `floatField -query -value $MinSX`;
-	 $minSY = `floatField -query -value $MinSY`;
-	 $minSZ = `floatField -query -value $MinSZ`;
-	 $maxSX = `floatField -query -value $MaxSX`;
-	 $maxSY = `floatField -query -value $MaxSY`;
-	 $maxSZ = `floatField -query -value $MaxSZ`;	
+	$minRX = `floatField -query -value $MinRX`;
+	$minRY = `floatField -query -value $MinRY`;
+	$minRZ = `floatField -query -value $MinRZ`;
+	$maxRX = `floatField -query -value $MaxRX`;
+	$maxRY = `floatField -query -value $MaxRY`;
+	$maxRZ = `floatField -query -value $MaxRZ`;
+	$minSX = `floatField -query -value $MinSX`;
+	$minSY = `floatField -query -value $MinSY`;
+	$minSZ = `floatField -query -value $MinSZ`;
+	$maxSX = `floatField -query -value $MaxSX`;
+	$maxSY = `floatField -query -value $MaxSY`;
+	$maxSZ = `floatField -query -value $MaxSZ`;	
 	
     vector $minT = << $minTX, $minTY, $minTZ >>, $maxT = << $maxTX, $maxTY, $maxTZ >>, 
 		$minR = << $minRX, $minRY, $minRZ >>, $maxR = << $maxRX, $maxRY, $maxRZ >>, 
 		$minS = << $minSX, $minSY, $minSZ >>, $maxS = << $maxSX, $maxSY, $maxSZ>>;
 	RandomPlacement($numDuplicates, $minT, $maxT, $minR, $maxR, $minS, $maxS);
-}
-{
-	string $window = `window -t "Random Generation"`;
-		columnLayout;
-			frameLayout -collapsable false -label "Number Of Duplicates";
-				rowLayout -numberOfColumns 1;
-					$NumDuplicates = `intField -minValue 1 -value 1`; 
-				setParent ..;
-			setParent ..;
-			
-			frameLayout -collapsable false -label "Minimum Translation";
-				rowLayout -numberOfColumns 3;
-					$MinTX = `floatField -precision 2 -step .01 -value 0`; 
-					$MinTY = `floatField -precision 2 -step .01 -value 0`;  
-					$MinTZ = `floatField -precision 2 -step .01 -value 0`; 
-				setParent ..;
-			setParent ..;
+	}
 
 
-			frameLayout -collapsable false -label "Maximum Translation";
-				rowLayout -numberOfColumns 3;
-					$MaxTX = `floatField -precision 2 -step .01 -value 10`; 
-					$MaxTY = `floatField -precision 2 -step .01 -value 10`;
-					$MaxTZ = `floatField -precision 2 -step .01 -value 10`;
-				setParent ..;
-			setParent ..;
-				
-			frameLayout -collapsable false -label "Minimum Rotation";
-				rowLayout -numberOfColumns 3;
-					$MinRX = `floatField -precision 2 -step .01 -value 0`; 
-					$MinRY = `floatField -precision 2 -step .01 -value 0`;  
-					$MinRZ = `floatField -precision 2 -step .01 -value 0`; 
-				setParent ..;
-			setParent ..;
+    global proc CreateWindow(){
+        string $window;
+        if(`window -exists $window`){
+            deleteUI -window $window;
+        }
+        $window = `window -t "Random Generation"`;
+		    string $column = `columnLayout -p $window`;
+		        string $row1 = `rowLayout -p $column -numberOfColumns 1`;
+				    text -p $row1 -label "Number of Duplicates";
+				string $row2 = `rowLayout -p $column -numberOfColumns 1`;
+					$NumDuplicates = `intField -p $row2 -minValue 1 -value 1`; 
+                
+                string $row3 = `rowLayout -p $column -numberOfColumns 1`;
+					text -p $row3 -label "Minimum Translation";
+				string $row4 = `rowLayout -p $column -numberOfColumns 3`;
+					$MinTX = `floatField -p $row4 -precision 2 -step .01 -value 0`; 
+					$MinTY = `floatField -p $row4 -precision 2 -step .01 -value 0`;  
+					$MinTZ = `floatField -p $row4 -precision 2 -step .01 -value 0`; 
+
+                string $row5 = `rowLayout -p $column -numberOfColumns 1`;
+					text -p $row5 -label "Maximum Translation";
+				string $row6 = `rowLayout -p $column -numberOfColumns 3`;
+					$MaxTX = `floatField -p $row6 -precision 2 -step .01 -value 10`; 
+					$MaxTY = `floatField -p $row6 -precision 2 -step .01 -value 10`;
+					$MaxTZ = `floatField -p $row6 -precision 2 -step .01 -value 10`;
+
+				string $row7 = `rowLayout -p $column -numberOfColumns 1`;
+					text -p $row7 -label  "Minimum Rotation";
+				string $row8 = `rowLayout -p $column -numberOfColumns 3`;
+					$MinRX = `floatField -p $row8 -precision 2 -step .01 -value 0`; 
+					$MinRY = `floatField -p $row8 -precision 2 -step .01 -value 0`;  
+					$MinRZ = `floatField -p $row8 -precision 2 -step .01 -value 0`; 
+
+				string $row9 = `rowLayout -p $column -numberOfColumns 1`;
+					text -p $row9 -label "Maximum Rotation";
+
+				string $row10 = `rowLayout -p $column -numberOfColumns 3`;
+					$MaxRX = `floatField -p $row10 -precision 2 -step .01 -value 90`; 
+					$MaxRY = `floatField -p $row10 -precision 2 -step .01 -value 90`;
+					$MaxRZ = `floatField -p $row10 -precision 2 -step .01 -value 90`;
+
+				string $row11 = `rowLayout -p $column -numberOfColumns 1`;
+					text -p $row11 -label "Minimum Scale";
+
+				string $row12 = `rowLayout -p $column -numberOfColumns 3`;
+					$MinSX = `floatField -p $row12 -precision 2 -step .01 -value .25`; 
+					$MinSY = `floatField -p $row12 -precision 2 -step .01 -value .25`;  
+					$MinSZ = `floatField -p $row12 -precision 2 -step .01 -value .25`; 
+
+				string $row13 = `rowLayout -p $column -numberOfColumns 1`;
+					text -p $row13 -label "Maximum Scale";
+
+				string $row14 = `rowLayout -p $column -numberOfColumns 3`;
+					$MaxSX = `floatField -p $row14 -precision 2 -step .01 -value 2`; 
+					$MaxSY = `floatField -p $row14 -precision 2 -step .01 -value 2`;
+					$MaxSZ = `floatField -p $row14 -precision 2 -step .01 -value 2`;
 			
-			frameLayout -collapsable false -label "Maximum Rotation";
-				rowLayout -numberOfColumns 3;
-					$MaxRX = `floatField -precision 2 -step .01 -value 90`; 
-					$MaxRY = `floatField -precision 2 -step .01 -value 90`;
-					$MaxRZ = `floatField -precision 2 -step .01 -value 90`;
-				setParent ..;
-			setParent ..;
-			
-			frameLayout -collapsable false -label "Minimum Scale";
-				rowLayout -numberOfColumns 3;
-					$MinSX = `floatField -precision 2 -step .01 -value .25`; 
-					$MinSY = `floatField -precision 2 -step .01 -value .25`;  
-					$MinSZ = `floatField -precision 2 -step .01 -value .25`; 
-				setParent ..;
-			setParent ..;
-			
-			frameLayout -collapsable false -label "Maximum Scale";
-				rowLayout -numberOfColumns 3;
-					$MaxSX = `floatField -precision 2 -step .01 -value 2`; 
-					$MaxSY = `floatField -precision 2 -step .01 -value 2`;
-					$MaxSZ = `floatField -precision 2 -step .01 -value 2`;
-				setParent ..;
-			setParent ..;
-			
-			rowLayout -numberOfColumns 1;
-				button -label "Duplicate" -command "Randomize();";
+			string $row15 = `rowLayout -p $column -numberOfColumns 1`;
+				button -p $row15 -label "Duplicate" -command "Randomize();";
 				
 		showWindow $window;
+	}
+	CreateWindow();
 }
-
 

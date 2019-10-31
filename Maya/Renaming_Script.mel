@@ -43,29 +43,30 @@
 		}
 	}
 
-}
 
-global string $NewName, $TextFieldName;
+	global string $NewName, $TextFieldName;
 
-global proc Rename(){
-    global string $NewName, $TextFieldName;
-	$NewName = `textField -query -text $TextFieldName`;
-	if(size($NewName) > 0){
-	    RenameOBJs($NewName);
-	}	
-}
-
-{
-    string $window;
-    if(`window -exists $window`){
-        deleteUI -window $window;
-    }
-    
-	$window = `window -t "Rename Objects"`;
-		columnLayout;
-				text -label "New Name";
-				$TextFieldName = ` textField `; 
-				button -label "Rename" -command "Rename();";
+	global proc Rename(){
+		$NewName = `textField -query -text $TextFieldName`;
+		if(size($NewName) > 0){
+			RenameOBJs($NewName);
+		}	
+	}
+	global proc CreateWindow(){
+		string $window;
+		if(`window -exists $window`)
+			deleteUI -window $window;
+		$window = `window -t "Rename Objects"`;
+			string $column = `columnLayout -p $window`;
+				string $frame = `frameLayout -p $column -collapsable false -label "New Name"`;
+					string $row1 = `rowLayout -p $frame -numberOfColumns 1`;
+						$TextFieldName = ` textField -p $row1 `; 
+			
+				string $row2 = `rowLayout -p $column -numberOfColumns 1`;
+					button -p $row2 -label "Rename" -command "Rename();";
 				
 		showWindow $window;
+	}
+	
+	CreateWindow();
 }

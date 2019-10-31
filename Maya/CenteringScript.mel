@@ -1,6 +1,8 @@
 {
+	global string $GetAllField, $GetIndivField, $GetRotField;
 	
-	proc GetCenters(int $CenterofAll, int $CenterofInd, int $OrientationOn){
+	global proc GetCenters(int $CenterofAll, int $CenterofInd, int $OrientationOn){
+		print($CenterofAll + " " + $CenterofInd + " " + $OrientationOn);
 	    string $objects[] = `ls -sl`;
 	    if(!size($objects)){
 		    error ("must select an object");
@@ -82,7 +84,34 @@
 		}
 	}
 	
-	GetCenters(1, 1, 1);
+	global proc CallFunc(){
+		int $GetAll = `intField -q -value $GetAllField`;
+		int $GetIndiv = `intField -q -value $GetIndivField`;
+		int $GetRot = `intField -q -value $GetRotField`;
+		GetCenters($GetAll, $GetIndiv, $GetRot);
+	}
+	
+	global proc OpenWindow(){
+		string $window;
+		if(`window -exists $window`)
+			deleteUI -window $window;
+		$window = `window -t "Centering Script"`;
+			string $column = `columnLayout`;
+				string $frame1 = `frameLayout -p $column -collapsable false -label "Get Individual Centers"`;
+					string $row1 = `rowLayout -p $frame1 -numberOfColumns 1`;
+						$GetIndivField = `intField -p $row1 -minValue 0 -maxValue 1 -value 0`; 
+				string $frame2 = `frameLayout -p $column -collapsable false -label "Get Center of All"`;
+					string $row2 = `rowLayout -p $frame2 -numberOfColumns 1`;
+						$GetAllField = `intField -p $row2 -minValue 0 -maxValue 1 -value 0`; 
+				string $frame3 = `frameLayout -p $column -collapsable false -label "Orient Centers"`;
+					string $row3 = `rowLayout -p $frame3 -numberOfColumns 1`;
+						$GetRotField = `intField -p $row3 -minValue 0 -maxValue 1 -value 0`;
+				string $buttonRow = `rowLayout -p $column  -numberOfColumns 1`;
+					string $activateButton = `button -p $buttonRow -l "Get Centers" -c "CallFunc();"`;
+		showWindow $window;
+	}
+	
+	OpenWindow();
 	
 	
 }

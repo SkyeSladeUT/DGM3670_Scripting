@@ -104,7 +104,9 @@
 		
 	}
 	
-	proc GetCenters(){
+	global int $GetIndiv, $GetAll, $GetRot;
+	
+	global proc GetCenters(){
 	    string $objects[] = `ls -sl`;
 	    if(!size($objects)){
 	        error("must select an object");
@@ -113,7 +115,9 @@
 	    GetCenterOfIndividual($objects);
 	}
 	
-	GetCenters();
 	
+
 	
-};
+}
+
+

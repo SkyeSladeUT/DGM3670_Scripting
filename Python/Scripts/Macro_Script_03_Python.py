@@ -1,6 +1,7 @@
 import maya.cmds as cmds
 import random
 
+
 def CreateSnowFlake(numOfLayers):
     snowflakeObject = cmds.polyCylinder(height = .5, subdivisionsCaps = 0, subdivisionsAxis = 6)
     snowflakeobj = snowflakeObject[0]
@@ -22,7 +23,7 @@ def CreateSnowFlake(numOfLayers):
 
     for i in range(0, numOfLayers, 1):
         style1 = random.randint(0,1)
-        if(style1):
+        if style1:
             cmds.polyExtrudeFacet(snowflakePoints)
             randTrans = random.uniform(MinTrans, MaxTrans)
             cmds.move(randTrans, 0, 0, snowflakePoints, cs=True, wd=True, r=True)
@@ -38,6 +39,7 @@ def CreateSnowFlake(numOfLayers):
         cmds.move(randTrans, 0, 0, snowflakePoints, cs=True, wd=True, r=True)
     return snowflakeobj
 
+
 def RandomPlacement(objName, minT, maxT, minR, maxR, minS, maxS):
     randXT = random.uniform(minT[0], maxT[0])
     randYT = random.uniform(minT[1], maxT[1])
@@ -51,6 +53,7 @@ def RandomPlacement(objName, minT, maxT, minR, maxR, minS, maxS):
     cmds.scale(randScale, randScale, randScale, objName, cp=True, ws=True)
     cmds.rotate(randXR, randYR, randZR, objName, cp=True, ws=True)
 
+
 def SpawnSnowFlakes(numOfFlakes, minT, maxT, minR, maxR, minS, maxS):
     snowflakeGroupName = cmds.group(empty=True, name="Snowflakes")
     for i in range(0, numOfFlakes, 1):
@@ -59,5 +62,6 @@ def SpawnSnowFlakes(numOfFlakes, minT, maxT, minR, maxR, minS, maxS):
         cmds.parent(snowflake, snowflakeGroupName)
         RandomPlacement(snowflake, minT, maxT, minR, maxR, minS, maxS)
         cmds.rename(snowflake, 'snowflake')
+
 
 SpawnSnowFlakes(20, [-50, -50, -50], [50, 50, 50], [0, 0, 0], [180, 180, 180], [.25,.25,.25], [1.5,1.5,1.5])

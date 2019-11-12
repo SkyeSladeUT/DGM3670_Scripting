@@ -1,9 +1,7 @@
 import maya.cmds as cmds
+import math
 
 class Calculator:
-
-    def __init__(self):
-        print('initialize')
 
     def Add(self, nums):
         total = 0
@@ -39,6 +37,7 @@ class Calculator:
             medianIndex2 = medianIndex1-1
             return ((nums[medianIndex1] + nums[medianIndex2])/2)
         else:
+            medianIndex1 = len(nums) / 2
             return (nums[(len(nums)/2)])
 
     def Mode(self, nums):
@@ -64,29 +63,17 @@ class Calculator:
             modes[len(modes)] = currNum
         return modes
 
-    def PowerRec(self, x, n)
-        if n == 0:
-            return 1
-        else:
-            return x * self.PowerRec(x,  n-1)
-
     def Power(self, nums):
         if len(nums) != 2:
             cmds.error('Power function can only have two values (base, exponent)')
-        return self.PowerRec(nums[0], nums[1])
-
-    def FactorialRec(self, n):
-        if n == 1:
-            return 1
-        else:
-            return n * self.FactorialRec(n-1)
+        return math.pow(nums[0], nums[1])
 
     def Factorial(self, nums):
         if len(nums) != 1:
             cmds.error('Factorial function can only take 1 number')
-        return self.FactorialRec(nums[0])
+        return math.factorial(nums[0])
 
 
 calc = Calculator()
-calc.Add([1,2,3])
+print(calc.Add([1,2,3]))
 

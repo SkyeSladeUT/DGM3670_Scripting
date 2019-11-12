@@ -1,6 +1,6 @@
 import maya.cmds as cmds
 
-GetAllField, GetIndivField, GetRotField = ""
+GetAllField, GetIndivField, GetRotField = "", "", ""
 def GetCenters(CenterofAll, CenterofInd, OrientationOn):
     objects = cmds.ls(sl=True)
     if not len(objects):
@@ -65,11 +65,23 @@ def GetCenters(CenterofAll, CenterofInd, OrientationOn):
         if OrientationOn:
             cmds.rotate(xRot, yRot, zRot, locatorName[0], cp=True)
 
+def CreateCenteringWindow():
+    windowName = cmds.window(title= 'Centering Script')
+    columnName = cmds.columnLayout(parent=windowName)
+    row2Name = cmds.rowLayout(parent=columnName, numberOfColumns=1)
+    GetAllField = cmds.checkBox(parent=row2Name, label='Get All Centers')
+    row1Name = cmds.rowLayout(parent=columnName, numberOfColumns=1)
+    GetIndivField = cmds.checkBox(parent=row1Name, label='Get Individual Centers')
+    row3Name = cmds.rowLayout(parent=columnName, numberOfColumns=1)
+    GetRotField = cmds.checkBox(parent=row3Name, label='Orient Centers')
+    buttonRowName = cmds.rowLayout(parent=columnName, numberOfColumns=1)
+    activateButton = cmds.button(parent=buttonRowName, label='Get Centers', command='CallFunc()')
+    cmds.showWindow(windowName)
+
 def CallFunc():
     GetAll = cmds.intField(GetAllField, query=True, value=True)
     GetIndiv = cmds.intField(GetIndivField, query=True, value=True)
     GetRot = cmds.intField(GetRotField, query=True, value=True)
     GetCenters(GetAll, GetIndiv, GetRot)
 
-
-
+CreateCenteringWindow()

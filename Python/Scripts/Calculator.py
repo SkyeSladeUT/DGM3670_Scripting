@@ -24,18 +24,19 @@ class Calculator:
     def Divide(self, nums):
         total = nums[0]
         for n in range(1, len(nums), 1):
-            total /= n
+            if nums[n] != 0:
+                total /= float(nums[n])
         return total
 
     def Mean(self, nums):
-        return (self.Add(nums)/len(nums))
+        return (self.Add(nums)/float(len(nums)))
 
     def Median(self, nums):
         nums.sort()
         if len(nums)%2 == 0:
             medianIndex1 = len(nums)/2
             medianIndex2 = medianIndex1-1
-            return ((nums[medianIndex1] + nums[medianIndex2])/2)
+            return ((nums[medianIndex1] + nums[medianIndex2])/2.0)
         else:
             medianIndex1 = len(nums) / 2
             return (nums[(len(nums)/2)])
@@ -45,7 +46,7 @@ class Calculator:
         maxNum = 0
         currTotal = 0
         currNum = nums[0]
-        for i in range(0,len(nums, 1)):
+        for i in range(0,len(nums)):
             if nums[i] == currNum:
                 currTotal += 1
             else:
@@ -53,7 +54,7 @@ class Calculator:
                     maxNum = currTotal
                     modes = [currNum]
                 elif currTotal == maxNum:
-                    modes[len(modes)] = currNum
+                    modes.append(currNum)
                 currNum = nums[i]
                 currTotal = 1
         if currTotal > maxNum:
@@ -75,5 +76,5 @@ class Calculator:
 
 
 calc = Calculator()
-print(calc.Add([1,2,3]))
+print(calc.Factorial([5]))
 

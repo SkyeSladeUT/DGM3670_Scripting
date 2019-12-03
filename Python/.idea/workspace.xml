@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4f5f7b8b-31ec-46e7-9d5f-ce85111c0297" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Scripts/Calculator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Scripts/Calculator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Scripts/RenamingScript.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Python.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Python.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scripts/CenteringScript.py" beforeDir="false" afterPath="$PROJECT_DIR$/Scripts/CenteringScript.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scripts/RandomGeneration.py" beforeDir="false" afterPath="$PROJECT_DIR$/Scripts/RandomGeneration.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scripts/Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Scripts/Test.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,8 +36,8 @@
   <component name="ProjectId" id="1TJV2MamZOdVlvRtitOnvUkVMyW" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="ca.rightsomegoodgames.mayacharm.settings.MayaSdkConfigurable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Maya DevKit/devkit/other/pymel/extras/completion/py" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">

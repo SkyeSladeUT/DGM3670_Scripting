@@ -36,7 +36,7 @@ class Calculator:
     def Divide(self, nums):
         total = nums[0]
         for n in nums[1:]:
-            total *= n
+            total /= n
         print("The dividend of " + self.createListString(nums) + " is " + str(total))
         return total
 

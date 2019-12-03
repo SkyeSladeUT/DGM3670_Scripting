@@ -12,8 +12,10 @@ def createControl():
     sels = cmds.ls(sl=True)
     if len(sels):
         for sel in sels:
-            bounds = cmds.xform(sel, boundingBox=True)
-            print bounds
+            bounds = cmds.xform(sel, query=True, boundingBox=True)
+            rotation = cmds.xform(sel, query=True, worldSpace=True, rotation=True)
+            TX = (bounds[0]+bounds[3])/2
+            TY = (bounds[1]+bounds[4])/2
 
 def changeColor(color):
     sels = cmds.ls(sl=True)

@@ -1,10 +1,8 @@
 import maya.cmds as cmds
-
-
 class Rename:
 
     def __init__(self):
-        pass
+        self.window_name = "Rename"
 
     def RenameOBJs(self, objectName, *args):
         objects = cmds.ls(sl=True, o=True)
@@ -34,24 +32,23 @@ class Rename:
             fullName = prefix + numberName + suffix
             objects[i] = cmds.rename(objects[i], fullName)
 
-    def CreateWindow(self):
-        if cmds.window("renamingWin", exists=True):
-            cmds.deleteUI("renamingWin")
-        windowName = cmds.window("renamingWin", t="Rename Objects")
-        columnName = cmds.columnLayout(p=windowName)
+    def create(self):
+        self.delete()
+        self.window_name = cmds.window(self.window_name, t="Rename Objects")
+        columnName = cmds.columnLayout(p=self.window_name)
         frameName = cmds.frameLayout(p=columnName, collapsable=False, label='New Name')
         row1 = cmds.rowLayout(p=frameName, numberOfColumns=1)
         TextFieldName = cmds.textField(p=row1)
         row2 = cmds.rowLayout(p=columnName, numberOfColumns=1)
+        cmds.button(p=row2, label="Rename",
+                    command=lambda *args: self.RenameOBJs(cmds.textField(TextFieldName, query=True, text=True)))
+        cmds.showWindow(self.window_name)
 
-        def ButtonPress(*args):
-            NewName = cmds.textField(TextFieldName, query=True, text=True)
-            if (len(NewName) > 0):
-                self.RenameOBJs(NewName)
-
-        cmds.button(p=row2, label="Rename", command=ButtonPress)
-        cmds.showWindow(windowName)
+    def delete(self):
+        if cmds.window(self.window_name, exists=True):
+            cmds.deleteUI(self.window_name)
 
 
-rename = Rename()
-rename.CreateWindow()
+#rename = Rename()
+#rename.create()
+

@@ -4,7 +4,11 @@ import random
 class RandomPlacement:
 
     def __init__(self):
-        pass
+        self.window_name = "Toolbox"
+
+    def delete(self):
+        if (cmds.window(self.window_name, exists=True)):
+            cmds.deleteUI(self.window_name)
 
     def randomPlacement(self, numDuplicates, minT, maxT, minR, maxR, minS, maxS, *args):
         objs = cmds.ls(sl=True)
@@ -27,7 +31,7 @@ class RandomPlacement:
                 cmds.parent(o, groupName)
         return duplicatedObjs
 
-    def CreateWindow(self):
+    def create(self):
         if cmds.window("randomWin", exists=True):
             cmds.deleteUI("randomWin")
         windowName = cmds.window("randomWin", t='Random Generation')
@@ -72,20 +76,27 @@ class RandomPlacement:
         MaxSX = cmds.floatField(p=row14, precision=2, step=.01, value=1.5)
         MaxSY = cmds.floatField(p=row14, precision=2, step=.01, value=1.5)
         MaxSZ = cmds.floatField(p=row14, precision=2, step=.01, value=1.5)
-        def ButtonPress(*args):
-            numberOfDups = cmds.intField(NumDuplicates, query=True, value=True)
-            minT = [cmds.floatField(MinTX, query=True, value=True), cmds.floatField(MinTY, query=True, value=True), cmds.floatField(MinTZ, query=True, value=True)]
-            maxT = [cmds.floatField(MaxTX, query=True, value=True), cmds.floatField(MaxTY, query=True, value=True), cmds.floatField(MaxTZ, query=True, value=True)]
-            minR = [cmds.floatField(MinRX, query=True, value=True), cmds.floatField(MinRY, query=True, value=True), cmds.floatField(MinRZ, query=True, value=True)]
-            maxR = [cmds.floatField(MaxRX, query=True, value=True), cmds.floatField(MaxRY, query=True, value=True), cmds.floatField(MaxRZ, query=True, value=True)]
-            minS = [cmds.floatField(MinSX, query=True, value=True), cmds.floatField(MinSY, query=True, value=True), cmds.floatField(MinSZ, query=True, value=True)]
-            maxS = [cmds.floatField(MaxSX, query=True, value=True), cmds.floatField(MaxSY, query=True, value=True), cmds.floatField(MaxSZ, query=True, value=True)]
-            self.randomPlacement(numberOfDups, minT, maxT, minR, maxR, minS, maxS)
         row15 = cmds.rowLayout(p=columnName, numberOfColumns=1)
-        cmds.button(p=row15, label='Duplicate', command=ButtonPress)
+        cmds.button(p=row15, label='Duplicate', command=lambda *args: self.randomPlacement(cmds.intField(NumDuplicates, query=True, value=True),
+                                                                                           [cmds.floatField(MinTX, query=True, value=True),
+                                                                                            cmds.floatField(MinTY, query=True, value=True),
+                                                                                            cmds.floatField(MinTZ, query=True, value=True)] ,
+                                                                                           [cmds.floatField(MaxTX, query=True, value=True),
+                                                                                            cmds.floatField(MaxTY, query=True, value=True),
+                                                                                            cmds.floatField(MaxTZ, query=True, value=True)],
+                                                                                           [cmds.floatField(MinRX, query=True, value=True),
+                                                                                            cmds.floatField(MinRY, query=True, value=True),
+                                                                                            cmds.floatField(MinRZ, query=True, value=True)],
+                                                                                           [cmds.floatField(MaxRX, query=True, value=True),
+                                                                                            cmds.floatField(MaxRY, query=True, value=True),
+                                                                                            cmds.floatField(MaxRZ, query=True, value=True)],
+                                                                                           [cmds.floatField(MinSX, query=True, value=True),
+                                                                                            cmds.floatField(MinSY, query=True, value=True),
+                                                                                            cmds.floatField(MinSZ, query=True, value=True)],
+                                                                                           [cmds.floatField(MaxSX, query=True, value=True),
+                                                                                            cmds.floatField(MaxSY, query=True, value=True),
+                                                                                            cmds.floatField(MaxSZ, query=True, value=True)]))
         cmds.showWindow(windowName)
 
-rp = RandomPlacement()
-rp.CreateWindow()
-
-
+#rp = RandomPlacement()
+#rp.create()

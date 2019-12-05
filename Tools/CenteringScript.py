@@ -4,7 +4,12 @@ from functools import partial
 class CenterObjects:
 
     def __init__(self):
-        pass
+        self.window_name = "Toolbox"
+
+    def delete(self):
+        if (cmds.window(self.window_name, exists=True)):
+            cmds.deleteUI(self.window_name)
+
 
     def GetCenters(self, CenterofAll, CenterofInd, OrientationOn):
         objects = cmds.ls(sl=True)
@@ -79,11 +84,9 @@ class CenterObjects:
             if OrientationOn:
                 cmds.rotate(xRot, yRot, zRot, locatorName[0], cp=True)
 
-    def CreateCenteringWindow(self):
+    def create(self):
 
-        if cmds.window("centeringWin", exists=True):
-            cmds.deleteUI("centeringWin")
-
+        self.delete()
         windowName = cmds.window("centeringWin", title='Centering Script')
         columnName = cmds.columnLayout(parent=windowName)
         row1Name = cmds.rowLayout(parent=columnName, numberOfColumns=1)
@@ -93,18 +96,15 @@ class CenterObjects:
         row3Name = cmds.rowLayout(parent=columnName, numberOfColumns=1)
         GetRotField = cmds.checkBox(parent=row3Name, label='Orient Centers')
         buttonRowName = cmds.rowLayout(parent=columnName, numberOfColumns=1)
-        def ButtonPress(*args):
-            GetAll = cmds.checkBox(GetAllField, query=True, value=True)
-            GetIndiv = cmds.checkBox(GetIndivField, query=True, value=True)
-            GetRot = cmds.checkBox(GetRotField, query=True, value=True)
-            self.GetCenters(GetAll, GetIndiv, GetRot)
         activateButton = cmds.button(parent=buttonRowName, label='Get Centers',
-                                     command=ButtonPress)
+                                     command=lambda *args: self.GetCenters( cmds.checkBox(GetAllField, query=True, value=True),
+                                                                            cmds.checkBox(GetIndivField, query=True, value=True),
+                                                                            cmds.checkBox(GetRotField, query=True, value=True)))
 
         cmds.showWindow(windowName)
 
 
 
 
-centers = CenterObjects()
-centers.CreateCenteringWindow()
+#centers = CenterObjects()
+#centers.create()

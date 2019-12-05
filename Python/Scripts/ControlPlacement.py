@@ -8,7 +8,7 @@ colorDictionary = {'null': 0, 'black':1, 'dark grey':2, 'grey':3, 'dark red':4,
                    'green2':23, 'light brown':24, 'puke':25, 'grass green':26, 'teal':27, 'blue3':28,
                    'blue4':29, 'purple':30, 'magenta':31}
 
-def createControl():
+def createControl(color):
     sels = cmds.ls(sl=True)
     if len(sels):
         for sel in sels:
@@ -16,8 +16,16 @@ def createControl():
             rotation = cmds.xform(sel, query=True, worldSpace=True, rotation=True)
             TX = (bounds[0]+bounds[3])/2
             TY = (bounds[1]+bounds[4])/2
+            TZ = (bounds[2]+bounds[5])/2
+            translation = ((bounds[0]+bounds[3])/2, (bounds[1]+bounds[4])/2, (bounds[2]+bounds[5])/2)
+            controlGroupObj = cmds.group(empty=True, name=sel.replace('jnt', 'ctrl_grp'))
+            controlObj = cmds.circle(name=sel.replace('jnt', 'ctrl'), nr=(0,1,0))
+            changeColor(color, sel)
+            cmds.parent(controlObj, controlGroupObj)
+            cmds.xform(controlGroupObj, rotation=rotation, translation=translation)
 
-def changeColor(color):
+
+def changeColor(color, obj):
     sels = cmds.ls(sl=True)
     if len(sels) > 0:
         for sel in sels:
@@ -30,4 +38,4 @@ def changeColor(color):
                 if type(color) is int:
                     cmds.setAttr('%s.overrideColor' % (child), color)
 
-createControl()
+createControl("pastel blue")

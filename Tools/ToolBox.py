@@ -13,6 +13,7 @@ class Toolbox():
         self.centeringTool = cmds.button(p=self.m_column, label="Create Locators", command= lambda *args: self.Center())
         self.controlPlacement = cmds.button(p=self.m_column, label="Create Controls", command= lambda *args: self.Controls())
         self.snowGenerator = cmds.button(p=self.m_column, label="Create Snowflakes", command=lambda *args: self.SnowFlake())
+        self.calculator = cmds.button(p=self.m_column, label="Calculator", command=lambda *args: self.Calculator())
         cmds.showWindow(self.window_name)
 
     def delete(self):
@@ -48,6 +49,12 @@ class Toolbox():
         reload(Macro_Script_03_Python)
         snow = Macro_Script_03_Python.Snowflake()
         snow.create()
+
+    def Calculator(self):
+        import Calculator
+        reload(Calculator)
+        calc = Calculator.Calculator()
+        calc.create()
 
 
 #tb = Toolbox()

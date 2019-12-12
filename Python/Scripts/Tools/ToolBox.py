@@ -11,9 +11,10 @@ class Toolbox():
         self.renameTool = cmds.button(p=self.m_column, label="Rename", command= lambda *args: self.RenameButn())
         self.randomTool = cmds.button(p=self.m_column, label="Random Generation", command= lambda *args: self.RandomGen())
         self.centeringTool = cmds.button(p=self.m_column, label="Create Locators", command= lambda *args: self.Center())
+        self.colorchanger = cmds.button(p=self.m_column, label="Change Color", command=lambda  *args: self.Color())
         self.controlPlacement = cmds.button(p=self.m_column, label="Create Controls", command= lambda *args: self.Controls())
-        self.snowGenerator = cmds.button(p=self.m_column, label="Create Snowflakes", command=lambda *args: self.SnowFlake())
         self.calculator = cmds.button(p=self.m_column, label="Calculator", command=lambda *args: self.Calculator())
+        self.snowGenerator = cmds.button(p=self.m_column, label="Create Snowflakes", command=lambda *args: self.SnowFlake())
         cmds.showWindow(self.window_name)
 
     def delete(self):
@@ -55,6 +56,12 @@ class Toolbox():
         reload(Calculator)
         calc = Calculator.Calculator()
         calc.create()
+
+    def Color(self):
+        import ChangeColor
+        reload(ChangeColor)
+        col = ChangeColor.colorChanger()
+        col.create()
 
 
 #tb = Toolbox()

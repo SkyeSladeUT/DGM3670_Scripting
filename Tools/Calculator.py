@@ -11,7 +11,8 @@ class Calculator:
         self.delete()
         self.window_name = cmds.window(self.window_name, title="Calculator")
         self.column = cmds.columnLayout(p=self.window_name, adj = True)
-        self.numbers = cmds.textField(p=self.column, text="enter numbers separated by a space")
+        cmds.text(p=self.column, label="Enter numbers seperated by a single space")
+        self.numbers = cmds.textField(p=self.column, text="")
         cmds.button(p=self.column, label="Add", command=lambda *args: self.RunCalc('add', cmds.textField(self.numbers, query=True, text=True)))
         cmds.button(p=self.column, label="Subtract", command=lambda *args: self.RunCalc('subtract', cmds.textField(self.numbers, query=True, text=True)))
         cmds.button(p=self.column, label="Multiply", command=lambda *args: self.RunCalc('multiply', cmds.textField(self.numbers, query=True, text=True)))
@@ -21,6 +22,7 @@ class Calculator:
         cmds.button(p=self.column, label="Mode", command=lambda *args: self.RunCalc('mode', cmds.textField(self.numbers, query=True, text=True)))
         cmds.button(p=self.column, label="Power", command=lambda *args: self.RunCalc('power', cmds.textField(self.numbers, query=True, text=True)))
         cmds.button(p=self.column, label="Factorial", command=lambda *args: self.RunCalc('factorial', cmds.textField(self.numbers, query=True, text=True)))
+        self.result = cmds.text(p=self.column, label="")
         cmds.showWindow(self.window_name)
 
 
@@ -67,6 +69,7 @@ class Calculator:
         for n in nums[1:]:
             total += n
         if printEquation:
+            cmds.text(self.result, edit=True, label="The sum of " + self.createListString(nums) + " is " + str(total))
             print("The sum of " + self.createListString(nums) + " is " + str(total))
         return total
 
@@ -74,6 +77,7 @@ class Calculator:
         total = nums[0]
         for n in nums[1:]:
             total -= n
+        cmds.text(self.result, edit=True, label="The difference of " + self.createListString(nums) + " is " + str(total))
         print("The difference of " + self.createListString(nums) + " is " + str(total))
         return total
 
@@ -81,6 +85,7 @@ class Calculator:
         total = nums[0]
         for n in nums[1:]:
             total *= n
+        cmds.text(self.result, edit=True, label="The product of " + self.createListString(nums) + " is " + str(total))
         print("The product of " + self.createListString(nums) + " is " + str(total))
         return total
 
@@ -88,11 +93,13 @@ class Calculator:
         total = nums[0]
         for n in nums[1:]:
             total /= n
+        cmds.text(self.result, edit=True, label="The dividend of " + self.createListString(nums) + " is " + str(total))
         print("The dividend of " + self.createListString(nums) + " is " + str(total))
         return total
 
     def Mean(self, nums):
         result = (self.Add(nums, False) / float(len(nums)))
+        cmds.text(self.result, edit=True, label="The Mean of " + self.createListString(nums) + " is " + str(result))
         print("The Mean of " + self.createListString(nums) + " is " + str(result))
         return result
 
@@ -105,6 +112,7 @@ class Calculator:
         else:
             medianIndex1 = len(nums) / 2
             result = (nums[(len(nums) / 2)])
+        cmds.text(self.result, edit=True, label="The Median of " + self.createListString(nums) + " is " + str(result))
         print("The Median of " + self.createListString(nums) + " is " + str(result))
         return result
 
@@ -129,6 +137,7 @@ class Calculator:
             modes = [currNum]
         elif currTotal == maxNum:
             modes.append(currNum)
+        cmds.text(self.result, edit=True, label="The Mode(s) of " + self.createListString(nums) + " is/are " + self.createListString(modes))
         print("The Mode(s) of " + self.createListString(nums) + " is/are " + self.createListString(modes))
         return modes
 
@@ -136,6 +145,7 @@ class Calculator:
         if len(nums) != 2:
             cmds.error('Power function can only have two values (base, exponent)')
         result = math.pow(nums[0], nums[1])
+        cmds.text(self.result, edit=True, label=str(nums[0]) + " to the power of " + str(nums[1]) + " is " + str(result))
         print(str(nums[0]) + " to the power of " + str(nums[1]) + " is " + str(result))
         return result
 
@@ -143,6 +153,7 @@ class Calculator:
         if len(nums) != 1:
             cmds.error('Factorial function can only take 1 number')
         result = math.factorial(nums[0])
+        cmds.text(self.result, edit=True, label="The factorial of " + str(nums[0]) + " is " + str(result))
         print("The factorial of " + str(nums[0]) + " is " + str(result))
         return result
 

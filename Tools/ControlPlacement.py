@@ -53,7 +53,7 @@ class ControlCreator():
         self.delete()
         self.window_name = cmds.window(self.window_name, t="Control Creator")
         self.column = cmds.columnLayout(p = self.window_name)
-        self.color = cmds.colorIndexSliderGrp(label="Select Color", min=0, max=32)
+        self.color = cmds.colorIndexSliderGrp(label="Select Color", min=1, max=32)
         self.controlBtn = cmds.button(p=self.column, label = "Create Controls", command = lambda *args: self.createControl((cmds.colorIndexSliderGrp(self.color, query=True, value=True))-1))
         cmds.showWindow(self.window_name)
 

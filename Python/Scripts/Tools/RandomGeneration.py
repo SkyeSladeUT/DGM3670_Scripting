@@ -78,24 +78,12 @@ class RandomPlacement:
         MaxSZ = cmds.floatField(p=row14, precision=2, step=.01, value=1.5)
         row15 = cmds.rowLayout(p=columnName, numberOfColumns=1)
         cmds.button(p=row15, label='Duplicate', command=lambda *args: self.randomPlacement(cmds.intField(NumDuplicates, query=True, value=True),
-                                                                                           [cmds.floatField(MinTX, query=True, value=True),
-                                                                                            cmds.floatField(MinTY, query=True, value=True),
-                                                                                            cmds.floatField(MinTZ, query=True, value=True)] ,
-                                                                                           [cmds.floatField(MaxTX, query=True, value=True),
-                                                                                            cmds.floatField(MaxTY, query=True, value=True),
-                                                                                            cmds.floatField(MaxTZ, query=True, value=True)],
-                                                                                           [cmds.floatField(MinRX, query=True, value=True),
-                                                                                            cmds.floatField(MinRY, query=True, value=True),
-                                                                                            cmds.floatField(MinRZ, query=True, value=True)],
-                                                                                           [cmds.floatField(MaxRX, query=True, value=True),
-                                                                                            cmds.floatField(MaxRY, query=True, value=True),
-                                                                                            cmds.floatField(MaxRZ, query=True, value=True)],
-                                                                                           [cmds.floatField(MinSX, query=True, value=True),
-                                                                                            cmds.floatField(MinSY, query=True, value=True),
-                                                                                            cmds.floatField(MinSZ, query=True, value=True)],
-                                                                                           [cmds.floatField(MaxSX, query=True, value=True),
-                                                                                            cmds.floatField(MaxSY, query=True, value=True),
-                                                                                            cmds.floatField(MaxSZ, query=True, value=True)]))
+                [cmds.floatField(MinTX, query=True, value=True), cmds.floatField(MinTY, query=True, value=True), cmds.floatField(MinTZ, query=True, value=True)],
+                [cmds.floatField(MaxTX, query=True, value=True), cmds.floatField(MaxTY, query=True, value=True), cmds.floatField(MaxTZ, query=True, value=True)],
+                [cmds.floatField(MinRX, query=True, value=True), cmds.floatField(MinRY, query=True, value=True), cmds.floatField(MinRZ, query=True, value=True)],
+                [cmds.floatField(MaxRX, query=True, value=True), cmds.floatField(MaxRY, query=True, value=True), cmds.floatField(MaxRZ, query=True, value=True)],
+                [cmds.floatField(MinSX, query=True, value=True), cmds.floatField(MinSY, query=True, value=True), cmds.floatField(MinSZ, query=True, value=True)],
+                [cmds.floatField(MaxSX, query=True, value=True), cmds.floatField(MaxSY, query=True, value=True), cmds.floatField(MaxSZ, query=True, value=True)]))
         cmds.showWindow(windowName)
 
 #rp = RandomPlacement()

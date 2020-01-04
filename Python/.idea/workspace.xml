@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4f5f7b8b-31ec-46e7-9d5f-ce85111c0297" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Scripts/Tools/Calculator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Scripts/Tools/Calculator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Scripts/Tools/ControlPlacement.py" beforeDir="false" afterPath="$PROJECT_DIR$/Scripts/Tools/ControlPlacement.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scripts/Tools/RandomGeneration.py" beforeDir="false" afterPath="$PROJECT_DIR$/Scripts/Tools/RandomGeneration.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Scripts/Tools/ToolBox.py" beforeDir="false" afterPath="$PROJECT_DIR$/Scripts/Tools/ToolBox.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,6 +37,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\School\College\Fall2019\DGM3670_Scripting\Python\Scripts" />
       <recent name="E:\School\College\Fall2019\DGM3670_Scripting\Python\Scripts\Tools" />
     </key>
   </component>

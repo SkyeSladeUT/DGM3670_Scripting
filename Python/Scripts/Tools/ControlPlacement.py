@@ -9,13 +9,13 @@ class ControlCreator():
         if len(sels):
             for sel in sels:
                 controlGroupObj = cmds.group(empty=True, name=self.renameCtrlGrp(sel))
-                controlObj = cmds.circle(name=self.renameCtrl(sel), nr=(0,1,0))
+                controlObj = cmds.circle(name=self.renameCtrl(sel), nr=(1,0,0))
                 self.changeColor(color, controlObj)
                 cmds.parent(controlObj, controlGroupObj)
                 cmds.matchTransform(controlGroupObj, sel, scale=False)
         else:
             controlGroupObj = cmds.group(empty=True, name='_Ctrl_Grp')
-            controlObj = cmds.circle(name="_Ctrl", nr=(0, 1, 0))
+            controlObj = cmds.circle(name="_Ctrl", nr=(1, 0, 0))
             self.changeColor(color, controlObj)
             cmds.parent(controlObj, controlGroupObj)
 
@@ -62,5 +62,5 @@ class ControlCreator():
             cmds.deleteUI(self.window_name)
 
 
-#cc = ControlCreator()
-#cc.create()
+cc = ControlCreator()
+cc.create()
